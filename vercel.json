@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/", "destination": "/MuleSoft_Agent_Fabric_Value_Story.html" },
+    { "source": "/(.*)", "destination": "/MuleSoft_Agent_Fabric_Value_Story.html" }
+  ]
+}
