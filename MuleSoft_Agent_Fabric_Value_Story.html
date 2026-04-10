@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MuleSoft | The value story</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+:root{--navy:#1B3A5C;--navy-dark:#0F2440;--navy-light:#2A5580;--bo:#A05E1C;--bol:#B8722E;--w:#FFF;--bg:#F4F7FA;--td:#1A1A2E;--tm:#3D4A5C;--sh:0 4px 24px rgba(27,58,92,.08);--shh:0 8px 40px rgba(27,58,92,.15)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',Tahoma,sans-serif;background:var(--bg);color:var(--td);overflow-x:hidden}
+/* Progress bar */
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--bo),var(--bol));z-index:200;width:0;transition:width .1s}
+/* Nav */
+.nav{position:fixed;top:3px;left:0;right:0;z-index:100;background:rgba(15,36,64,.95);backdrop-filter:blur(12px);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:52px;border-bottom:2px solid var(--bo)}
+.nav-brand{color:var(--w);font-weight:700;font-size:1rem}.nav-brand span{color:var(--bo)}
+.nav-links{display:flex;gap:.1rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:calc(100% - 200px)}.nav-links::-webkit-scrollbar{display:none}
+.nav-link{color:rgba(255,255,255,.85);text-decoration:none;font-size:.65rem;font-weight:500;padding:.35rem .5rem;border-radius:6px;transition:all .2s;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.nav-link:hover,.nav-link.active{color:var(--w);background:rgba(160,94,28,.25)}
+/* Hero */
+.hero{min-height:100vh;background:var(--navy-dark);display:flex;align-items:center;justify-content:center;padding:5rem 2rem 4rem;position:relative;overflow:hidden}
+#particles{position:absolute;inset:0;z-index:0}
+.hero-content{max-width:1100px;text-align:center;position:relative;z-index:1}
+.hero-badge{display:inline-block;background:rgba(160,94,28,.2);border:1px solid rgba(160,94,28,.4);color:var(--bol);padding:.4rem 1.2rem;border-radius:50px;font-size:.72rem;font-weight:600;letter-spacing:.05em;margin-bottom:2rem}
+.hero h1{color:var(--w);font-size:5.5rem;font-weight:900;line-height:1.05;letter-spacing:-.04em;margin-bottom:1.5rem}
+.hero h1 span{color:var(--bol)}
+.hero-sub{color:rgba(255,255,255,.85);font-size:1.2rem;line-height:1.7;max-width:750px;margin:0 auto 3rem}
+.hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat-value{color:var(--bol);font-size:2.8rem;font-weight:800;display:block}
+.hero-stat-label{color:rgba(255,255,255,.75);font-size:.72rem;font-weight:500;letter-spacing:.03em;margin-top:.3rem}
+.scroll-cta{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);animation:bounce 2s infinite;cursor:pointer;color:rgba(255,255,255,.5);font-size:.7rem;font-weight:500;text-align:center;letter-spacing:.05em}
+.scroll-cta svg{display:block;margin:0 auto .3rem;width:20px;height:20px;stroke:rgba(255,255,255,.5);fill:none;stroke-width:2}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+/* Sections */
+.section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:3rem}
+.section-tag{display:inline-block;background:rgba(160,94,28,.1);color:var(--bo);padding:.3rem 1rem;border-radius:50px;font-size:.68rem;font-weight:600;letter-spacing:.06em;margin-bottom:1rem}
+.section-title{font-size:2.2rem;font-weight:800;color:var(--navy);letter-spacing:-.02em;margin-bottom:1rem}
+.section-sub{color:var(--tm);font-size:1rem;max-width:680px;margin:0 auto;line-height:1.7}
+/* Exec */
+.exec-section{background:var(--w);border-radius:20px;padding:3rem;box-shadow:var(--sh);margin:2rem auto;max-width:1100px}
+.exec-columns{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:1.5rem}
+.exec-col h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:2px solid var(--bo)}
+.exec-col p{font-size:.86rem;color:var(--td);line-height:1.75;margin-bottom:1rem}
+.exec-callout{background:linear-gradient(135deg,var(--navy-dark),var(--navy));border-radius:14px;padding:1.5rem;margin-top:1.5rem}
+.exec-callout p{color:rgba(255,255,255,.9);font-size:.88rem;line-height:1.7;margin:0}
+.exec-callout strong{color:var(--bol)}
+/* Transition */
+.tsec{background:var(--w);border-radius:20px;padding:3.5rem;box-shadow:var(--sh);margin:2rem auto;max-width:1100px}
+.tflow{display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin:2.5rem 0}
+.tbox{flex:1;min-width:280px;padding:2rem;border-radius:16px;text-align:center}
+.tfrom{background:linear-gradient(135deg,#E8EDF2,#D1DAE3);border:2px solid #B8C5D3}
+.tto{background:linear-gradient(135deg,var(--navy),var(--navy-light));border:2px solid var(--bo)}
+.tarrow{font-size:2rem;color:var(--bo);font-weight:800;flex-shrink:0}
+.tbox h3{font-size:1.1rem;font-weight:700;margin-bottom:.75rem}
+.tfrom h3{color:var(--navy)}.tto h3{color:var(--w)}
+.tfrom p{color:var(--tm);font-size:.85rem;line-height:1.6}.tto p{color:rgba(255,255,255,.9);font-size:.85rem;line-height:1.6}
+.era{font-size:.65rem;font-weight:600;letter-spacing:.06em;margin-bottom:.75rem;display:block}
+.tfrom .era{color:var(--tm)}.tto .era{color:var(--bol)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem}
+.sitem{text-align:center;padding:1rem}.slbl{font-size:.65rem;font-weight:600;letter-spacing:.05em;color:var(--tm);margin-bottom:.4rem}.sval{font-size:.85rem;color:var(--navy);font-weight:600}
+/* Pillars */
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2rem}
+.pcard{background:var(--w);border-radius:16px;padding:2rem;box-shadow:var(--sh);transition:all .3s;cursor:pointer;border:2px solid transparent;overflow:hidden}
+.pcard:hover{box-shadow:var(--shh);transform:translateY(-4px);border-color:var(--bo)}
+.pcard.active{border-color:var(--bo);box-shadow:var(--shh)}
+.picon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;font-size:1.4rem}
+.pd .picon{background:rgba(72,187,120,.1);color:#2F855A}
+.po .picon{background:rgba(160,94,28,.1);color:var(--bo)}
+.pg .picon{background:rgba(27,58,92,.1);color:var(--navy)}
+.pob .picon{background:rgba(107,70,193,.1);color:#553C9A}
+.pcard h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.pcard>p{font-size:.83rem;color:var(--tm);line-height:1.6;margin-bottom:1rem}
+.pdet{font-size:.78rem;color:var(--tm);line-height:1.6;padding-top:.75rem;border-top:1px solid #E2E8F0;display:none}
+.pcard.active .pdet{display:block}
+/* Architecture flow */
+.arch-flow{margin-top:2.5rem;background:linear-gradient(135deg,var(--navy-dark),var(--navy));border-radius:16px;padding:2rem;position:relative;overflow:hidden}
+.arch-steps{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap}
+.arch-step{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:1.25rem;text-align:center;flex:1;min-width:140px;transition:all .4s;cursor:pointer;position:relative}
+.arch-step.lit{background:rgba(160,94,28,.25);border-color:var(--bol)}
+.arch-step h4{color:rgba(255,255,255,.9);font-size:.82rem;font-weight:700;margin-bottom:.3rem}
+.arch-step p{color:rgba(255,255,255,.6);font-size:.68rem;line-height:1.4}
+.arch-trace{position:absolute;top:0;left:0;width:0;height:3px;background:var(--bol);transition:width .8s ease;border-radius:3px 3px 0 0}
+.arch-step.lit .arch-trace{width:100%}
+.arch-arrow{color:rgba(255,255,255,.3);font-size:1.2rem;flex-shrink:0}
+.arch-scenario{margin-top:1.5rem;padding:1.2rem;background:rgba(255,255,255,.06);border-radius:10px;text-align:center}
+.arch-scenario p,.arch-scenario strong{color:rgba(255,255,255,.85);font-size:.82rem;line-height:1.6}
+.arch-btn{background:linear-gradient(135deg,var(--bo),var(--bol));color:var(--w);border:none;padding:.65rem 1.8rem;border-radius:8px;font-weight:600;font-size:.82rem;cursor:pointer;margin-top:1rem;transition:all .3s}
+.arch-btn:hover{transform:scale(1.04)}
+/* Solutions */
+.solgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem}
+.solcard{background:var(--w);border-radius:14px;padding:1.75rem;box-shadow:var(--sh);border-top:3px solid var(--bo);transition:all .3s}
+.solcard:hover{box-shadow:var(--shh);transform:translateY(-3px)}
+.solcard h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.35rem}
+.solfamous{font-size:.72rem;font-weight:600;color:var(--bo);margin-bottom:.75rem;letter-spacing:.03em}
+.solcard p{font-size:.82rem;color:var(--tm);line-height:1.6}
+/* Scenario */
+.scenario-track{position:relative;margin-top:2rem}
+.scenario-fill{position:absolute;top:24px;left:0;height:4px;background:linear-gradient(90deg,var(--bo),var(--bol));border-radius:4px;transition:width .6s ease;width:0}
+.scenario-line{position:absolute;top:24px;left:0;right:0;height:4px;background:#E2E8F0;border-radius:4px}
+.scenario-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;position:relative;z-index:1}
+.scenario-step{text-align:center;cursor:pointer;padding-top:3rem;transition:all .3s}
+.scenario-dot{width:16px;height:16px;border-radius:50%;background:#E2E8F0;border:3px solid var(--bg);position:absolute;top:17px;left:50%;transform:translateX(-50%);transition:all .3s;z-index:2}
+.scenario-step.active .scenario-dot{background:var(--bo);box-shadow:0 0 0 4px rgba(160,94,28,.2)}
+.scenario-step h4{font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.scenario-step p{font-size:.72rem;color:var(--tm);line-height:1.4}
+.scenario-detail{margin-top:2rem;background:var(--w);border-radius:14px;padding:2rem;box-shadow:var(--sh);border-left:4px solid var(--bo);min-height:120px}
+.scenario-detail h3{font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.scenario-detail p{font-size:.86rem;color:var(--td);line-height:1.7;margin-bottom:.5rem}
+.scenario-metric{display:inline-block;background:rgba(160,94,28,.08);color:var(--bo);padding:.3rem .8rem;border-radius:6px;font-size:.78rem;font-weight:600;margin:.25rem .25rem 0 0}
+/* Risk */
+.risk-section{background:linear-gradient(135deg,var(--navy-dark),var(--navy));padding:5rem 2rem}
+.risk-inner{max-width:1200px;margin:0 auto}
+.risk-header{text-align:center;margin-bottom:3rem}
+.risk-header .section-tag{background:rgba(160,94,28,.2);color:var(--bol)}
+.risk-header h2{font-size:2.2rem;font-weight:800;color:var(--w);letter-spacing:-.02em;margin-bottom:1rem}
+.risk-header p{color:rgba(255,255,255,.75);font-size:1rem;max-width:680px;margin:0 auto;line-height:1.7}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.rcard{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:1.5rem;text-align:center;transition:all .3s}
+.rcard:hover{background:rgba(255,255,255,.1);border-color:var(--bol)}
+.rcard .ri{font-size:2rem;margin-bottom:.75rem}
+.rcard h4{font-size:.88rem;font-weight:700;margin-bottom:.5rem;color:var(--w)}
+.rcard p{font-size:.76rem;color:rgba(255,255,255,.8);line-height:1.5}
+/* Competitors */
+.comp-section{background:var(--navy-dark);padding:5rem 2rem;border-top:1px solid rgba(255,255,255,.06)}
+.comp-inner{max-width:1200px;margin:0 auto}
+.comp-header{text-align:center;margin-bottom:3rem}
+.comp-header .section-tag{background:rgba(160,94,28,.2);color:var(--bol)}
+.comp-header h2{font-size:2.2rem;font-weight:800;color:var(--w);letter-spacing:-.02em;margin-bottom:1rem}
+.comp-header p{color:rgba(255,255,255,.75);font-size:1rem;max-width:700px;margin:0 auto;line-height:1.7}
+.comp-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:2rem;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.3)}
+.comp-table thead th{background:var(--navy);color:rgba(255,255,255,.95);padding:1rem .85rem;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-align:left;border-bottom:2px solid var(--bo)}
+.comp-table thead th:first-child{width:150px}
+.comp-table tbody td{background:rgba(255,255,255,.04);padding:.8rem .85rem;font-size:.75rem;color:rgba(255,255,255,.85);line-height:1.5;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top}
+.comp-table tbody tr:hover td{background:rgba(255,255,255,.08)}
+.comp-table tbody td:first-child{font-weight:700;color:rgba(255,255,255,.95);font-size:.78rem}
+.comp-table .ms-col{background:rgba(160,94,28,.08)!important}
+.comp-table thead .ms-col{background:var(--bo)!important;color:var(--w)}
+.comp-verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem}
+.comp-vcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1.75rem;transition:all .3s}
+.comp-vcard:hover{background:rgba(255,255,255,.1);border-color:var(--bol)}
+.comp-vcard h4{font-size:.95rem;font-weight:700;color:var(--bol);margin-bottom:.5rem}
+.comp-vcard p{font-size:.82rem;color:rgba(255,255,255,.8);line-height:1.65}
+.comp-badge{display:inline-block;font-size:.62rem;font-weight:600;letter-spacing:.05em;padding:.2rem .6rem;border-radius:50px;margin-bottom:.75rem}
+.comp-badge.leader{background:rgba(72,187,120,.15);color:#68D391}
+.comp-badge.challenger{background:rgba(160,94,28,.2);color:var(--bol)}
+/* Benchmarks */
+.bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2rem}
+.bcard{background:var(--w);border-radius:14px;padding:1.5rem;box-shadow:var(--sh);border-left:4px solid var(--bo);transition:all .3s;position:relative;overflow:hidden}
+.bcard:hover{box-shadow:var(--shh);transform:translateY(-2px)}
+.bstat{font-size:1.8rem;font-weight:800;color:var(--navy);margin-bottom:.3rem}
+.bdesc{font-size:.83rem;color:var(--td);line-height:1.5;margin-bottom:.5rem}
+.bsrc{font-size:.68rem;color:var(--tm);font-weight:500}
+.bbar{position:absolute;bottom:0;left:0;height:3px;background:linear-gradient(90deg,var(--bo),var(--bol));width:0;transition:width 1.5s ease}
+/* Calculator */
+.calc-sec{background:var(--w);border-radius:20px;padding:3rem;box-shadow:var(--sh);max-width:900px;margin:0 auto}
+.calc-row{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;border-bottom:1px solid #E2E8F0}
+.calc-row:last-child{border:none}
+.calc-label{font-size:.88rem;font-weight:600;color:var(--navy);flex:1}
+.calc-slider{flex:1.5;margin:0 1.5rem;-webkit-appearance:none;height:6px;border-radius:3px;background:#E2E8F0;outline:none}
+.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--bo);cursor:pointer}
+.calc-val{font-size:.88rem;font-weight:700;color:var(--bo);min-width:80px;text-align:right}
+.calc-result{background:linear-gradient(135deg,var(--navy-dark),var(--navy));border-radius:14px;padding:2rem;margin-top:1.5rem;text-align:center}
+.calc-result h3{color:var(--w);font-size:1rem;font-weight:600;margin-bottom:.75rem}
+.calc-big{font-size:3rem;font-weight:900;color:var(--bol);display:block;margin-bottom:.5rem}
+.calc-note{font-size:.78rem;color:rgba(255,255,255,.7)}
+/* Journey */
+.jtl{position:relative;padding-left:40px;margin-top:2rem}
+.jtl::before{content:'';position:absolute;left:40px;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--bo),var(--navy))}
+.js{display:flex;margin-bottom:2.5rem;position:relative}
+.jd{width:14px;height:14px;border-radius:50%;background:var(--bo);position:absolute;left:34px;top:8px;z-index:1;border:3px solid var(--bg)}
+.jc{background:var(--w);border-radius:14px;padding:1.5rem;box-shadow:var(--sh);margin-left:60px;flex:1;transition:all .3s}
+.jc:hover{box-shadow:var(--shh)}
+.jtime{font-size:.68rem;font-weight:600;color:var(--bo);letter-spacing:.04em;margin-bottom:.3rem}
+.jc h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.jc p{font-size:.82rem;color:var(--tm);line-height:1.6}
+/* Craig */
+.ch{display:flex;gap:3rem;margin-top:2rem;align-items:flex-start}
+.cavatar{width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--navy-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;border:4px solid var(--bo)}
+.cavatar span{font-size:3.5rem;color:var(--w);font-weight:800}
+.cbio h3{font-size:1.4rem;font-weight:800;color:var(--navy);margin-bottom:.5rem}
+.cbio p{font-size:.88rem;color:var(--td);line-height:1.7;margin-bottom:1rem}
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+.ccard{background:var(--w);border-radius:12px;padding:1.25rem;box-shadow:var(--sh);text-align:center;border-top:3px solid var(--bo);transition:all .3s}
+.ccard:hover{transform:translateY(-3px);box-shadow:var(--shh)}
+.ccard h4{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.ccard p{font-size:.75rem;color:var(--tm);line-height:1.5}
+/* Prep */
+.prep-section{margin-top:3rem;background:linear-gradient(135deg,var(--navy-dark),var(--navy));border-radius:16px;padding:2.5rem}
+.prep-section h3{color:var(--w);font-size:1.2rem;font-weight:700;margin-bottom:1.5rem}
+.prep-toggle{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;margin-bottom:.75rem;overflow:hidden;transition:all .3s}
+.prep-toggle:hover{border-color:rgba(255,255,255,.25)}
+.prep-q{padding:1rem 1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.prep-q h4{color:rgba(255,255,255,.95);font-size:.88rem;font-weight:600}
+.prep-q span{color:var(--bol);font-size:1.2rem;transition:transform .3s}
+.prep-a{padding:0 1.25rem;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
+.prep-a.open{max-height:800px;padding:0 1.25rem 1rem}
+.prep-a p{color:rgba(255,255,255,.8);font-size:.82rem;line-height:1.7;margin-bottom:.5rem}
+/* Fade in */
+.fi{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.fi.vis{opacity:1;transform:translateY(0)}
+/* Responsive */
+@media(max-width:768px){.hero h1{font-size:2.8rem}.cgrid,.exec-columns{grid-template-columns:1fr}.rgrid,.solgrid,.pgrid{grid-template-columns:1fr}.jtl::before{left:20px}.js{flex-direction:column!important}.jc{width:100%;margin-left:40px!important}.jd{left:20px}.tflow{flex-direction:column}.nav-links{display:none}.ch{flex-direction:column;align-items:center;text-align:center}.arch-steps{flex-direction:column}.scenario-steps{grid-template-columns:repeat(3,1fr)}.comp-table{display:block;overflow-x:auto}.comp-verdict{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progressBar"></div>
+
+<nav class="nav">
+  <div class="nav-brand">Mule<span>Soft</span> | Value story</div>
+  <div class="nav-links">
+    <a class="nav-link active" onclick="go('hero')">Home</a>
+    <a class="nav-link" onclick="go('executive')">Executive summary</a>
+    <a class="nav-link" onclick="go('transition')">The shift</a>
+    <a class="nav-link" onclick="go('pillars')">Four pillars</a>
+    <a class="nav-link" onclick="go('solutions')">Solutions</a>
+    <a class="nav-link" onclick="go('scenario')">Customer scenario</a>
+    <a class="nav-link" onclick="go('risk')">Agent sprawl</a>
+    <a class="nav-link" onclick="go('competitors')">Vs competitors</a>
+    <a class="nav-link" onclick="go('benchmarks')">Benchmarks</a>
+    <a class="nav-link" onclick="go('calculator')">Value calculator</a>
+    <a class="nav-link" onclick="go('journey')">Journey</a>
+    <a class="nav-link" onclick="go('craig')">Who's Craig</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <canvas id="particles"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">Consumption Value Delivery Manager | Prepared for Dave Phillips</div>
+    <h1>From integration platform to <span>agentic intelligence layer</span></h1>
+    <p class="hero-sub">Every enterprise will have AI agents. The question is whether they operate as a coordinated workforce, or become the next generation of shadow IT. MuleSoft is uniquely positioned to answer that question.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-value" data-target="445" data-suffix="%">0%</span><span class="hero-stat-label">Proven ROI</span></div>
+      <div class="hero-stat"><span class="hero-stat-value" data-target="84" data-suffix="%">0%</span><span class="hero-stat-label">Agent resolution rate</span></div>
+      <div class="hero-stat"><span class="hero-stat-value" data-target="1" data-suffix="B+">0</span><span class="hero-stat-label">Agents by 2029</span></div>
+      <div class="hero-stat"><span class="hero-stat-value" data-target="0.10" data-prefix="$" data-suffix="">$0</span><span class="hero-stat-label">Per agent action</span></div>
+    </div>
+  </div>
+  <div class="scroll-cta" onclick="go('executive')"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>Scroll to explore</div>
+</section>
+
+<!-- Executive summary -->
+<section id="executive" class="section">
+  <div class="section-header fi">
+    <span class="section-tag">Executive perspective</span>
+    <h2 class="section-title">What I am seeing in the enterprise space</h2>
+  </div>
+  <div class="exec-section fi">
+    <div class="exec-columns">
+      <div class="exec-col">
+        <h3>The agent sprawl problem</h3>
+        <p>Enterprises are deploying AI agents at pace, but without coordination. Gartner projects 40% of enterprise apps will embed agents by end of 2026. The result: fragmented agent estates across Bedrock, Vertex AI, Copilot Studio, and Agentforce with no unified governance, no visibility, and no way to measure value.</p>
+        <p>This mirrors the API sprawl challenge MuleSoft solved a decade ago. The difference is the speed: agent proliferation is happening 10x faster than API growth, and the governance gap is already visible.</p>
+      </div>
+      <div class="exec-col">
+        <h3>Why this matters for consumption</h3>
+        <p>Most MuleSoft customers have significant dormant estates, APIs and connectors built but underutilised. The shift to agentic architectures creates a natural activation moment: every agent needs APIs, every API becomes an agent-callable tool, and every interaction generates consumption.</p>
+        <p>The Consumption Value Delivery Manager role sits at exactly this inflection point, turning latent platform investment into active, measurable, recurring value through Flex Credits at $0.10 per action.</p>
+      </div>
+    </div>
+    <div class="exec-callout">
+      <p><strong>The reframing question:</strong> What if the biggest risk is not choosing the wrong AI strategy, but having no strategy for governing the agents you have already deployed?</p>
+    </div>
+  </div>
+</section>
+
+<!-- The shift -->
+<section id="transition" class="section">
+  <div class="section-header fi">
+    <span class="section-tag">The platform evolution</span>
+    <h2 class="section-title">The shift</h2>
+    <p class="section-sub">MuleSoft is evolving from connecting systems to orchestrating intelligent digital labour.</p>
+  </div>
+  <div class="tsec fi">
+    <div class="tflow">
+      <div class="tbox tfrom"><span class="era">2006 to 2024</span><h3>Integration platform</h3><p>Connect apps, data, and devices. API-led connectivity. Build once, reuse everywhere.</p></div>
+      <div class="tarrow">&#10132;</div>
+      <div class="tbox tto"><span class="era">2025 onwards</span><h3>Agentic intelligence layer</h3><p>Discover, orchestrate, govern, and observe autonomous AI agents across every platform and protocol.</p></div>
+    </div>
+    <div class="sgrid">
+      <div class="sitem"><div class="slbl">APIs managed</div><div class="sval">Billions of transactions</div></div>
+      <div class="sitem"><div class="slbl">Agent protocols</div><div class="sval">MCP + A2A native</div></div>
+      <div class="sitem"><div class="slbl">Pricing evolution</div><div class="sval">Flex Credits at $0.10/action</div></div>
+      <div class="sitem"><div class="slbl">Customer base</div><div class="sval">Enterprise-grade scale</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Four pillars -->
+<section id="pillars" class="section">
+  <div class="section-header fi">
+    <span class="section-tag">Agent Fabric architecture</span>
+    <h2 class="section-title">The four pillars of Agent Fabric</h2>
+    <p class="section-sub">A unified control plane for the agentic enterprise, purpose-built on a decade of API-led connectivity.</p>
+  </div>
+  <div class="pgrid fi">
+    <div class="pcard pd" onclick="toggleP(this)"><div class="picon">&#128269;</div><h3>Discover</h3><p>Agent Scanners detect and register agents across Agentforce, Bedrock, Vertex AI, and Copilot Studio into the centralised registry.</p><div class="pdet"><strong>Exchange</strong> becomes the single catalogue for APIs, connectors, templates, and now AI agents. Real-time awareness of every agent in the estate.</div></div>
+    <div class="pcard po" onclick="toggleP(this)"><div class="picon">&#9881;</div><h3>Orchestrate</h3><p>A context-aware broker that routes tasks to the right agent or tool for reliable multi-step workflows.</p><div class="pdet"><strong>The Broker</strong> supports MCP and A2A protocols, meaning agents built on any platform can participate in orchestrated workflows.</div></div>
+    <div class="pcard pg" onclick="toggleP(this)"><div class="picon">&#128274;</div><h3>Govern</h3><p>Enterprise-grade policies, authentication, rate limits, and compliance controls on every agent interaction.</p><div class="pdet"><strong>Flex Gateway</strong> extends API governance to agent traffic. GoDaddy ANS already uses this to verify agent identity at scale.</div></div>
+    <div class="pcard pob" onclick="toggleP(this)"><div class="picon">&#128200;</div><h3>Observe</h3><p>Visual maps of how agents, systems, and LLMs interconnect, with performance monitoring and flow tracing.</p><div class="pdet"><strong>Agent Visualiser</strong> makes consumption visible and powers value conversations with data.</div></div>
+  </div>
+
+  <!-- Interactive architecture trace -->
+  <div class="arch-flow fi">
+    <div class="arch-steps" id="archSteps">
+      <div class="arch-step" data-step="0"><div class="arch-trace"></div><h4>Agent request</h4><p>Customer's agent sends a prompt</p></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-step" data-step="1"><div class="arch-trace"></div><h4>Discover</h4><p>Registry identifies available agents and tools</p></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-step" data-step="2"><div class="arch-trace"></div><h4>Orchestrate</h4><p>Broker routes to the right resources</p></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-step" data-step="3"><div class="arch-trace"></div><h4>Govern</h4><p>Policies enforced, identity verified</p></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-step" data-step="4"><div class="arch-trace"></div><h4>Observe</h4><p>Action logged, value measured</p></div>
+    </div>
+    <div class="arch-scenario" id="archScenario">
+      <strong>Click "Trace a request" to watch an agent request flow through the architecture.</strong>
+    </div>
+    <div style="text-align:center"><button class="arch-btn" onclick="traceArch()">Trace a request</button></div>
+  </div>
+</section>
+
+<!-- MuleSoft solutions -->
+<section id="solutions" class="section">
+  <div class="section-header fi">
+    <span class="section-tag">The MuleSoft portfolio</span>
+    <h2 class="section-title">More than Agent Fabric</h2>
+    <p class="section-sub">The full Anypoint Platform is the backbone of Salesforce's integration and automation strategy.</p>
+  </div>
+  <div class="solgrid fi">
+    <div class="solcard"><h3>Anypoint Platform</h3><div class="solfamous">Famous for: the unified integration platform</div><p>Single platform for iPaaS and full lifecycle API management. 1,500+ pre-built connectors. The foundation everything else runs on.</p></div>
+    <div class="solcard"><h3>Anypoint Exchange</h3><div class="solfamous">Famous for: the API marketplace</div><p>Curated library of reusable APIs, connectors, and templates. The reason MuleSoft achieves 445% ROI: build once, reuse everywhere.</p></div>
+    <div class="solcard"><h3>Anypoint Code Builder</h3><div class="solfamous">Famous for: AI-powered development</div><p>AI IDE that builds integrations in natural language or agentically via the MuleSoft MCP Server.</p></div>
+    <div class="solcard"><h3>MuleSoft Composer</h3><div class="solfamous">Famous for: no-code integration</div><p>Drag-and-drop integration for business users. Pre-built connectors for Salesforce, NetSuite, Workday, and more.</p></div>
+    <div class="solcard"><h3>Flex Gateway</h3><div class="solfamous">Famous for: universal API governance</div><p>Ultrafast gateway extending Anypoint governance everywhere: on-premises, cloud, edge. Now extended to agent traffic.</p></div>
+    <div class="solcard"><h3>Agent Fabric</h3><div class="solfamous">Famous for: the agentic control plane</div><p>Discover, orchestrate, govern, and observe AI agents across every platform. The "air traffic controller" for the digital workforce.</p></div>
+    <div class="solcard"><h3>AI Gateway</h3><div class="solfamous">Famous for: LLM traffic management</div><p>Intelligent routing, cost controls, and policy enforcement across every AI provider from one control point.</p></div>
+    <div class="solcard"><h3>Runtime Fabric</h3><div class="solfamous">Famous for: deploy anywhere</div><p>Deploy into Docker/Kubernetes on AWS, Azure, GCP, or on-premises. Full control with enterprise-grade resilience.</p></div>
+    <div class="solcard"><h3>DataWeave</h3><div class="solfamous">Famous for: data transformation power</div><p>Purpose-built scripting language for transforming data between any format: JSON, XML, CSV, flat files.</p></div>
+  </div>
+</section>
+
+<!-- Customer scenario walkthrough -->
+<section id="scenario" class="section">
+  <div class="section-header fi">
+    <span class="section-tag">Live walkthrough</span>
+    <h2 class="section-title">From dormant estate to active agentic value</h2>
+    <p class="section-sub">A European financial services company with 200 APIs, 60% dormant. Click each stage to walk through the transformation.</p>
+  </div>
+  <div class="scenario-track fi">
+    <div class="scenario-line"></div>
+    <div class="scenario-fill" id="scenarioFill"></div>
+    <div class="scenario-steps" id="scenarioSteps">
+      <div class="scenario-step active" onclick="setScenario(0)" style="position:relative"><div class="scenario-dot"></div><h4>Discovery</h4><p>Baseline audit</p></div>
+      <div class="scenario-step" onclick="setScenario(1)" style="position:relative"><div class="scenario-dot"></div><h4>Activation</h4><p>Dormant to active</p></div>
+      <div class="scenario-step" onclick="setScenario(2)" style="position:relative"><div class="scenario-dot"></div><h4>Agent layer</h4><p>Fabric deployment</p></div>
+      <div class="scenario-step" onclick="setScenario(3)" style="position:relative"><div class="scenario-dot"></div><h4>Governance</h4><p>Policy enforcement</p></div>
+      <div class="scenario-step" onclick="setScenario(4)" style="position:relative"><div class="scenario-dot"></div><h4>Value realised</h4><p>Measurable ROI</p></div>
+    </div>
+  </div>
+  <div class="scenario-detail fi" id="scenarioDetail">
+    <h3>Stage 1: Discovery and baseline</h3>
+    <p>Agent Scanners identify 200 APIs across the estate. 120 are dormant, built but not actively consumed. 14 shadow agents are detected running without governance across three cloud providers.</p>
+    <span class="scenario-metric">200 APIs catalogued</span><span class="scenario-metric">60% dormant</span><span class="scenario-metric">14 shadow agents found</span>
+  </div>
+</section>
+
+<!-- Agent sprawl risk -->
+<section id="risk" class="risk-section">
+  <div class="risk-inner">
+    <div class="risk-header fi">
+      <span class="section-tag">The governance imperative</span>
+      <h2>Agent sprawl: the new shadow IT</h2>
+      <p>1 billion+ agents projected by 2029. Without governance, enterprises face the same fragmentation crisis that APIs created a decade ago, but at 10x the speed.</p>
+    </div>
+    <div class="rgrid fi">
+      <div class="rcard"><div class="ri">&#9888;</div><h4>No visibility</h4><p>74% of companies cannot track which agents are active, what data they access, or what actions they take.</p></div>
+      <div class="rcard"><div class="ri">&#128274;</div><h4>No governance</h4><p>95% of GenAI pilots fail to deliver P&L impact. The barrier is not the technology, it is the absence of enterprise controls.</p></div>
+      <div class="rcard"><div class="ri">&#128176;</div><h4>No value measurement</h4><p>Without consumption tracking, agent investments become cost centres rather than value drivers. Flex Credits change that equation.</p></div>
+      <div class="rcard"><div class="ri">&#127760;</div><h4>Multi-platform chaos</h4><p>Agents on Bedrock, Vertex AI, Copilot Studio, and Agentforce operating in silos. No interoperability, no shared context.</p></div>
+      <div class="rcard"><div class="ri">&#128680;</div><h4>Compliance exposure</h4><p>Unregistered agents making decisions without audit trails. In regulated industries, this is a board-level risk.</p></div>
+      <div class="rcard"><div class="ri">&#9201;</div><h4>Speed of proliferation</h4><p>40x growth in four years. By the time you build a governance strategy manually, the agent estate has already doubled.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Competitors -->
+<section id="competitors" class="comp-section">
+  <div class="comp-inner">
+    <div class="comp-header fi">
+      <span class="section-tag">Competitive landscape</span>
+      <h2>Why MuleSoft wins in the agentic era</h2>
+      <p>Integration is table stakes. The differentiator now is who can discover, orchestrate, govern, and observe agents at enterprise scale, across every ecosystem.</p>
+    </div>
+    <table class="comp-table fi">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="ms-col">MuleSoft</th>
+          <th>Boomi</th>
+          <th>Workato</th>
+          <th>Tibco</th>
+          <th>SnapLogic</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>API-led connectivity</td>
+          <td class="ms-col">Industry originator. 500,000+ reusable assets on Exchange. Full lifecycle management.</td>
+          <td>Low-code integration with Atom architecture. Simpler but less reuse depth.</td>
+          <td>Recipe-based automation. Strong for workflow, weaker on API product strategy.</td>
+          <td>Tibco Cloud Integration with API management. Strong in event-driven, less API-first than MuleSoft.</td>
+          <td>SnapGPT for AI-assisted pipelines. Growing but limited enterprise footprint.</td>
+        </tr>
+        <tr>
+          <td>Agent discovery and registry</td>
+          <td class="ms-col">Agent Scanners detect agents across Agentforce, Bedrock, Vertex AI, Copilot Studio. Centralised registry on Exchange.</td>
+          <td>No native agent discovery. Relies on manual cataloguing or partner tools.</td>
+          <td>No agent scanning capability. Focused on recipe and connector library.</td>
+          <td>No agent discovery capability. Event-driven focus, not agent-aware.</td>
+          <td>AgentCreator announced. Single-platform, no cross-ecosystem scanning.</td>
+        </tr>
+        <tr>
+          <td>Multi-agent orchestration</td>
+          <td class="ms-col">Agent Broker routes tasks dynamically across agents and MCP servers. Topic-based domains with intelligent delegation.</td>
+          <td>Flow-based orchestration for integrations. No agent-to-agent routing layer.</td>
+          <td>Workflow orchestration is strong, but designed for app-to-app, not agent-to-agent.</td>
+          <td>Event-driven orchestration and BPMN support. Not positioned for agentic workloads.</td>
+          <td>AutoPilot for pipeline automation. No multi-agent broker architecture.</td>
+        </tr>
+        <tr>
+          <td>Governance and compliance</td>
+          <td class="ms-col">Flex Gateway for agent-to-agent policy enforcement. Full audit trail, rate limiting, identity verification.</td>
+          <td>API gateway available. Governance is integration-focused, not agent-aware.</td>
+          <td>Enterprise security and compliance. Governance is connector-level, not agent-level.</td>
+          <td>API management via Mashery. Governance is API-focused, no agent policy layer.</td>
+          <td>Basic API management. No dedicated agent governance layer.</td>
+        </tr>
+        <tr>
+          <td>Protocol support (MCP and A2A)</td>
+          <td class="ms-col">Native MCP server support. A2A protocol interoperability. Open standard commitment.</td>
+          <td>No MCP or A2A support announced. Proprietary connector model.</td>
+          <td>No MCP support. Strong on pre-built connectors (1,200+) but closed ecosystem.</td>
+          <td>No MCP or A2A. Focused on messaging protocols (MQTT, AMQP, Kafka).</td>
+          <td>No MCP or A2A support. Proprietary Snap architecture.</td>
+        </tr>
+        <tr>
+          <td>Ecosystem breadth</td>
+          <td class="ms-col">Salesforce + open ecosystem. Works with any cloud, any agent platform, any protocol.</td>
+          <td>Broad connector library (2,000+). Strong in hybrid cloud but vendor-neutral positioning.</td>
+          <td>1,200+ connectors. Strong SaaS-to-SaaS, weaker on-prem and custom.</td>
+          <td>Strong in event-driven and real-time analytics. Less breadth in SaaS connectors.</td>
+          <td>Growing connector set. Enterprise adoption still maturing.</td>
+        </tr>
+        <tr>
+          <td>Consumption pricing</td>
+          <td class="ms-col">Flex Credits at $0.10/action. Consumption-based model aligned with digital labour economics.</td>
+          <td>Connection-based pricing. Less predictable for high-volume agent workloads.</td>
+          <td>Task-based pricing. Competitive for automation but complex at agent scale.</td>
+          <td>Traditional enterprise licensing. No consumption-based model for agent workloads.</td>
+          <td>Task-based pricing. Transparent but limited flexibility at scale.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="comp-verdict fi">
+      <div class="comp-vcard">
+        <span class="comp-badge leader">MuleSoft advantage</span>
+        <h4>Only platform purpose-built for the agentic enterprise</h4>
+        <p>No competitor has an equivalent to Agent Fabric's four-pillar approach: discover, orchestrate, govern, observe. MuleSoft is not retrofitting agentic capabilities onto an integration platform, it is extending a decade of API-led connectivity into the agent layer natively.</p>
+      </div>
+      <div class="comp-vcard">
+        <span class="comp-badge leader">MuleSoft advantage</span>
+        <h4>Protocol-first, not proprietary-first</h4>
+        <p>MCP server support and A2A interoperability mean MuleSoft customers are not locked into a single agent ecosystem. Agents built on Bedrock, Vertex AI, Copilot Studio, and Agentforce all participate equally.</p>
+      </div>
+      <div class="comp-vcard">
+        <span class="comp-badge challenger">The reframing question</span>
+        <h4>What if the real competition is not another platform?</h4>
+        <p>The true competitor is the status quo: fragmented agents, no governance, no visibility. Every enterprise will have agents. The question is whether they operate as a coordinated workforce or as the next generation of shadow IT.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benchmarks -->
+<section id="benchmarks" class="section">
+  <div class="section-header fi">
+    <span class="section-tag">Industry evidence</span>
+    <h2 class="section-title">The benchmarks that frame the conversation</h2>
+    <p class="section-sub">Every value conversation needs a factual foundation. Sourced and verifiable.</p>
+  </div>
+  <div class="bgrid fi">
+    <div class="bcard" data-pct="100"><div class="bstat">445%</div><div class="bdesc">Proven ROI for MuleSoft when API reuse is maximised. Every dollar returns $5.45.</div><div class="bsrc">Salesforce / Integrate.io, 2026</div><div class="bbar"></div></div>
+    <div class="bcard" data-pct="84"><div class="bstat">84%</div><div class="bdesc">Cases resolved by Agentforce without human intervention across 380,000+ interactions.</div><div class="bsrc">Salesforce internal metrics, Q2 FY2026</div><div class="bbar"></div></div>
+    <div class="bcard" data-pct="100"><div class="bstat">120%</div><div class="bdesc">Year-over-year growth in Data Cloud and AI ARR, reaching $1.2 billion.</div><div class="bsrc">Salesforce Q2 FY2026 earnings</div><div class="bbar"></div></div>
+    <div class="bcard" data-pct="90"><div class="bstat">1 billion+</div><div class="bdesc">Projected AI agents by 2029. A 40-fold increase from 2025 levels.</div><div class="bsrc">Industry projections, 2026</div><div class="bbar"></div></div>
+    <div class="bcard" data-pct="95"><div class="bstat">95%</div><div class="bdesc">Of GenAI pilots fail to deliver measurable P&L impact. Governance is the barrier.</div><div class="bsrc">MIT Nanda, 2025</div><div class="bbar"></div></div>
+    <div class="bcard" data-pct="74"><div class="bstat">74%</div><div class="bdesc">Of companies have yet to see tangible AI value. The opportunity: activate what exists.</div><div class="bsrc">BCG, 2024</div><div class="bbar"></div></div>
+    <div class="bcard" data-pct="70"><div class="bstat">70%</div><div class="bdesc">Of transformation value comes from people and process, not technology alone.</div><div class="bsrc">BCG, 2024</div><div class="bbar"></div></div>
+    <div class="bcard" data-pct="40"><div class="bstat">40%</div><div class="bdesc">Of enterprise apps will include AI agents by end of 2026. The wave is here.</div><div class="bsrc">Gartner, 2026</div><div class="bbar"></div></div>
+  </div>
+</section>
+
+<!-- Value calculator -->
+<section id="calculator" class="section">
+  <div class="section-header fi">
+    <span class="section-tag">Consumption value modelling</span>
+    <h2 class="section-title">Size the opportunity</h2>
+    <p class="section-sub">Model how converting dormant MuleSoft assets drives measurable consumption growth.</p>
+  </div>
+  <div class="calc-sec fi">
+    <div class="calc-row"><span class="calc-label">Total APIs in estate</span><input type="range" class="calc-slider" id="cApis" min="50" max="1000" value="200" oninput="updateCalc()"><span class="calc-val" id="vApis">200</span></div>
+    <div class="calc-row"><span class="calc-label">Dormant percentage</span><input type="range" class="calc-slider" id="cDorm" min="10" max="90" value="60" oninput="updateCalc()"><span class="calc-val" id="vDorm">60%</span></div>
+    <div class="calc-row"><span class="calc-label">Reactivation target (%)</span><input type="range" class="calc-slider" id="cReact" min="10" max="80" value="40" oninput="updateCalc()"><span class="calc-val" id="vReact">40%</span></div>
+    <div class="calc-row"><span class="calc-label">Avg monthly calls per active API</span><input type="range" class="calc-slider" id="cCalls" min="1000" max="100000" value="15000" step="1000" oninput="updateCalc()"><span class="calc-val" id="vCalls">15,000</span></div>
+    <div class="calc-row"><span class="calc-label">Agent actions per API call</span><input type="range" class="calc-slider" id="cActions" min="1" max="10" value="3" oninput="updateCalc()"><span class="calc-val" id="vActions">3</span></div>
+    <div class="calc-result">
+      <h3>Estimated annual consumption value (Flex Credits)</h3>
+      <span class="calc-big" id="calcTotal">$0</span>
+      <span class="calc-note" id="calcNote">Adjust the sliders above to model different scenarios</span>
+    </div>
+  </div>
+</section>
+
+<!-- Journey -->
+<section id="journey" class="section">
+  <div class="section-header fi">
+    <span class="section-tag">Implementation roadmap</span>
+    <h2 class="section-title">The 12-month value journey</h2>
+    <p class="section-sub">A phased approach that delivers measurable value at every stage.</p>
+  </div>
+  <div class="jtl fi">
+    <div class="js"><div class="jd"></div><div class="jc"><div class="jtime">Month 1 to 3</div><h3>Foundation: discover and baseline</h3><p>Deploy Agent Scanners. Catalogue the full API and agent estate. Identify dormant assets. Establish consumption baseline and define success metrics with stakeholders.</p></div></div>
+    <div class="js"><div class="jd"></div><div class="jc"><div class="jtime">Month 4 to 6</div><h3>Activate: convert dormant to productive</h3><p>Prioritise highest-value dormant APIs for reactivation. Deploy Agent Fabric for initial agent orchestration. First Flex Credit consumption begins. Quick wins reported to leadership.</p></div></div>
+    <div class="js"><div class="jd"></div><div class="jc"><div class="jtime">Month 7 to 9</div><h3>Scale: expand across business units</h3><p>Roll out governance policies via Flex Gateway. Onboard additional agent platforms. Expand value calculator model with real consumption data. Build internal champions.</p></div></div>
+    <div class="js"><div class="jd"></div><div class="jc"><div class="jtime">Month 10 to 12</div><h3>Optimise: measure, refine, grow</h3><p>Full observability across the agent estate. Consumption-based value reporting to C-suite. Identify expansion opportunities. Build the case for next fiscal year investment.</p></div></div>
+  </div>
+</section>
+
+<!-- Who's Craig -->
+<section id="craig" class="section">
+  <div class="section-header fi">
+    <span class="section-tag">The candidate</span>
+    <h2 class="section-title">Who's Craig</h2>
+  </div>
+  <div class="ch fi">
+    <div class="cavatar"><span>CH</span></div>
+    <div class="cbio">
+      <h3>Craig Horton</h3>
+      <p>20 years on the supplier side at HPE, Atos, Microsoft, and Salesforce, managing enterprise accounts including Philips across multiple engagements. A career built on translating complex technology into measurable business outcomes for customers who need clarity, not complexity.</p>
+      <p>At Salesforce, identified EUR 300M in EBITDA improvement potential for a global client, demonstrating the kind of value forensics this role demands. Now transitioning that supplier-side intelligence into consumption value delivery, where the goal is not selling more, but activating what customers already own.</p>
+    </div>
+  </div>
+  <div class="cgrid fi">
+    <div class="ccard"><h4>Oxford executive leadership</h4><p>99.5% distinction. Strategic leadership with academic rigour.</p></div>
+    <div class="ccard"><h4>Global executive MBA with AI</h4><p>Starting May 2026 at University of Hertfordshire. 24-month programme.</p></div>
+    <div class="ccard"><h4>20+ AI and cloud certifications</h4><p>AWS Cloud Economics, Google Cloud, GenAI, and agentic AI credentials.</p></div>
+    <div class="ccard"><h4>AI Business Value Framework</h4><p>Built the BVF tool: a structured methodology for scoring AI initiative value.</p></div>
+    <div class="ccard"><h4>The Transformation Brief</h4><p>Weekly thought leadership newsletter on AI transformation in the enterprise.</p></div>
+    <div class="ccard"><h4>EUR 300M opportunity identified</h4><p>EBITDA improvement potential identified for a global client at Salesforce.</p></div>
+    <div class="ccard"><h4>20 years enterprise experience</h4><p>HPE, Atos, Microsoft, Salesforce. Deep knowledge of enterprise buying and selling.</p></div>
+    <div class="ccard"><h4>Philips account expertise</h4><p>Managed the Philips account directly across multiple supplier engagements.</p></div>
+  </div>
+
+  <!-- Interview prep -->
+  <div class="prep-section fi">
+    <h3>Interview preparation: Dave Phillips, 10 April 2026</h3>
+
+    <div class="prep-toggle"><div class="prep-q" onclick="togglePrep(this)"><h4>Why MuleSoft, why now?</h4><span>+</span></div><div class="prep-a"><p>MuleSoft is at an inflection point. The shift from integration platform to agentic intelligence layer is the most significant evolution in enterprise middleware in a decade. I have spent 20 years helping enterprise customers extract value from technology investments. The Consumption Value Delivery Manager role is where my experience in value articulation, customer success, and transformation strategy converges with MuleSoft's next chapter. Agent Fabric, Flex Credits, and the four-pillar architecture are not just product features, they are a new commercial model for digital labour. I want to help customers see that, measure it, and scale it.</p></div></div>
+
+    <div class="prep-toggle"><div class="prep-q" onclick="togglePrep(this)"><h4>Are you too senior for this role?</h4><span>+</span></div><div class="prep-a"><p>I understand the question. My career has been at the strategic end, and this role requires hands-on customer engagement. But that is exactly why I am excited about it. I have always been at my best when I am close to the customer, not managing from a distance. The value conversations this role requires, connecting platform investment to measurable business outcomes, are what I have done throughout my career. The difference is the context: consumption-based pricing and agentic architectures create a new kind of value story, and I want to be the person who tells it.</p></div></div>
+
+    <div class="prep-toggle"><div class="prep-q" onclick="togglePrep(this)"><h4>How would you approach a customer with a dormant MuleSoft estate?</h4><span>+</span></div><div class="prep-a"><p>Start with discovery, not selling. Deploy Agent Scanners to baseline the estate: how many APIs, what percentage are active, where are the shadow agents. Then build the value case with the customer, showing them what reactivation looks like in Flex Credits. I would use a phased approach: quick wins in the first 90 days to build credibility, then scale across business units. The goal is to make the customer see their dormant estate as latent revenue, not technical debt.</p></div></div>
+
+    <div class="prep-toggle"><div class="prep-q" onclick="togglePrep(this)"><h4>How do you handle a customer who sees no value in upgrading?</h4><span>+</span></div><div class="prep-a"><p>I would reframe the conversation. Rather than talking about upgrading, I would talk about what they are leaving on the table. Show them the consumption data: here is what your active APIs generate, here is what your dormant ones could generate if activated. Make it a financial conversation, not a technical one. And if they still resist, ask the question that stops the room: what happens when your competitors deploy governed agents and you are still running ungoverned shadow AI?</p></div></div>
+
+    <div class="prep-toggle"><div class="prep-q" onclick="togglePrep(this)"><h4>What is your experience with consumption-based models?</h4><span>+</span></div><div class="prep-a"><p>At Microsoft, I worked within the Azure consumption model where value was directly tied to usage growth. At Salesforce, I saw the transition from seat-based to consumption-based with Data Cloud and Flex Credits. The key insight is that consumption models require a different kind of customer engagement: you cannot just close a deal and walk away. You need ongoing value delivery, regular health checks, and the ability to show customers their ROI in real time. That is exactly what this role is designed to do.</p></div></div>
+
+    <div class="prep-toggle"><div class="prep-q" onclick="togglePrep(this)"><h4>Questions I would ask Dave</h4><span>+</span></div><div class="prep-a"><p>1. What does the typical customer journey look like from initial engagement to measurable consumption growth?</p><p>2. How is the team currently identifying and prioritising dormant estates?</p><p>3. What is the biggest barrier customers cite when resisting the shift to consumption-based pricing?</p><p>4. How does the Consumption Value Delivery Manager role interact with the broader account team and AEs?</p><p>5. What would success look like for this role in the first six months?</p></div></div>
+
+    <div class="prep-toggle"><div class="prep-q" onclick="togglePrep(this)"><h4>The reframing question for Dave</h4><span>+</span></div><div class="prep-a"><p>Dave, before we close, can I ask you something that has been on my mind? Given that agent sprawl is accelerating faster than API sprawl ever did, what if the biggest risk for MuleSoft customers is not choosing the wrong platform, but having no governance strategy for the agents they have already deployed? I think that reframing, from platform selection to agent governance, is where the consumption value story really begins.</p></div></div>
+  </div>
+</section>
+
+<script>
+// Smooth scroll
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+
+// Progress bar
+window.addEventListener('scroll',()=>{const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('progressBar').style.width=(s/h*100)+'%'});
+
+// Particle network
+const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
+let particles=[];
+function resizeCanvas(){canvas.width=canvas.parentElement.offsetWidth;canvas.height=canvas.parentElement.offsetHeight}
+resizeCanvas();window.addEventListener('resize',resizeCanvas);
+class Particle{constructor(){this.reset()}
+reset(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;this.r=Math.random()*2+1}
+update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1}
+draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle='rgba(160,94,28,.3)';ctx.fill()}}
+for(let i=0;i<60;i++)particles.push(new Particle());
+function drawParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});
+for(let i=0;i<particles.length;i++)for(let j=i+1;j<particles.length;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);
+if(d<120){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(160,94,28,${.12*(1-d/120)})`;ctx.stroke()}}
+requestAnimationFrame(drawParticles)}
+drawParticles();
+
+// Animated counters
+let countersAnimated=false;
+function animateCounters(){if(countersAnimated)return;countersAnimated=true;
+document.querySelectorAll('.hero-stat-value').forEach(el=>{const target=parseFloat(el.dataset.target),prefix=el.dataset.prefix||'',suffix=el.dataset.suffix||'';
+let current=0;const step=target/60,isFloat=target<1;
+const interval=setInterval(()=>{current+=step;if(current>=target){current=target;clearInterval(interval)}
+el.textContent=prefix+(isFloat?current.toFixed(2):Math.floor(current))+suffix},25)})}
+
+// Pillar toggle
+function toggleP(el){el.classList.toggle('active')}
+
+// Architecture trace
+const archScenarios=['A customer service agent receives a complex billing dispute requiring data from three backend systems.','The Registry identifies: CRM agent (Agentforce), billing API (Anypoint), and fraud detection model (Bedrock).','The Broker assembles a workflow: pull customer history, cross-reference billing records, run fraud check, compose resolution.','Flex Gateway enforces: rate limits applied, PII masked, agent identity verified via certificate, full audit trail recorded.','Action logged: 7 API calls, 3 agent interactions, 1 resolution. Total: 10 Flex Credit actions at $0.10 each. Value: measurable.'];
+function traceArch(){const steps=document.querySelectorAll('.arch-step');steps.forEach(s=>{s.classList.remove('lit')});
+steps.forEach((s,i)=>{setTimeout(()=>{s.classList.add('lit');document.getElementById('archScenario').innerHTML='<p>'+archScenarios[i]+'</p>'},i*1800)})}
+
+// Scenario walkthrough
+const scenarioData=[
+{title:'Stage 1: Discovery and baseline',desc:'Agent Scanners identify 200 APIs across the estate. 120 are dormant, built but not actively consumed. 14 shadow agents are detected running without governance across three cloud providers.',metrics:['200 APIs catalogued','60% dormant','14 shadow agents found']},
+{title:'Stage 2: Activation sprint',desc:'The top 48 dormant APIs are prioritised by business value and reactivation complexity. Integration teams reconnect them to active workflows. Composer enables business users to self-serve simple integrations.',metrics:['48 APIs reactivated','First Flex Credits consumed','3 quick wins in 60 days']},
+{title:'Stage 3: Agent Fabric deployment',desc:'Agent Fabric goes live. The Broker begins routing agent requests across the newly activated APIs. Agents on Agentforce and Bedrock now share a common orchestration layer.',metrics:['Agent Broker live','2 platforms connected','Multi-agent workflows active']},
+{title:'Stage 4: Governance at scale',desc:'Flex Gateway policies enforced across all agent traffic. Identity verification, rate limiting, PII masking, and full audit trails operational. Compliance team signs off.',metrics:['100% agent traffic governed','Zero compliance gaps','Full audit trail active']},
+{title:'Stage 5: Value realised',desc:'Consumption dashboard shows 340% increase in API utilisation. Flex Credit revenue is trackable and reportable. The customer presents ROI to their board using data from the Observe pillar.',metrics:['340% utilisation increase','$2.1M annual consumption','Board-ready ROI report']}
+];
+function setScenario(idx){const steps=document.querySelectorAll('.scenario-step');steps.forEach((s,i)=>{s.classList.toggle('active',i<=idx)});
+document.getElementById('scenarioFill').style.width=(idx/4*100)+'%';
+const d=scenarioData[idx],det=document.getElementById('scenarioDetail');
+det.innerHTML='<h3>'+d.title+'</h3><p>'+d.desc+'</p>'+d.metrics.map(m=>'<span class="scenario-metric">'+m+'</span>').join('')}
+
+// Calculator
+function updateCalc(){const apis=+document.getElementById('cApis').value,dorm=+document.getElementById('cDorm').value,react=+document.getElementById('cReact').value,calls=+document.getElementById('cCalls').value,actions=+document.getElementById('cActions').value;
+document.getElementById('vApis').textContent=apis;document.getElementById('vDorm').textContent=dorm+'%';document.getElementById('vReact').textContent=react+'%';document.getElementById('vCalls').textContent=calls.toLocaleString();document.getElementById('vActions').textContent=actions;
+const reactivated=Math.round(apis*(dorm/100)*(react/100)),monthly=reactivated*calls*actions*0.10,annual=monthly*12;
+document.getElementById('calcTotal').textContent='$'+Math.round(annual).toLocaleString();
+document.getElementById('calcNote').textContent=reactivated+' APIs reactivated, generating '+Math.round(monthly).toLocaleString()+' in monthly Flex Credit consumption'}
+updateCalc();
+
+// Prep toggle
+function togglePrep(el){const a=el.nextElementSibling,s=el.querySelector('span');
+if(a.classList.contains('open')){a.classList.remove('open');s.textContent='+';s.style.transform='rotate(0)'}
+else{a.classList.add('open');s.textContent='-';s.style.transform='rotate(180deg)'}}
+
+// Intersection Observer for fade-in
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');
+if(e.target.querySelector&&e.target.querySelectorAll('.bcard').length){e.target.querySelectorAll('.bcard').forEach((c,i)=>{setTimeout(()=>{c.querySelector('.bbar').style.width=c.dataset.pct+'%'},i*150)})}}})},{threshold:.15});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+
+// Counter trigger
+const heroObs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)animateCounters()})},{threshold:.5});
+heroObs.observe(document.querySelector('.hero-content'));
+</script>
+
+</body>
+</html>
