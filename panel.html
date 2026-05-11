@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel deck, Phase 1 to Phase 2 | Craig Horton</title>
+<meta name="description" content="Craig Horton panel deck. The Poland Hub Phase 1 win, the Phase 2 agentic shift, the 90-day sprint, the three questions for the room.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C;
+  --navy-dark:#0F2440;
+  --navy-light:#2A5580;
+  --bo:#A05E1C;
+  --bol:#B8722E;
+  --w:#FFFFFF;
+  --line:rgba(184,114,46,0.32);
+  --soft:rgba(255,255,255,0.08);
+  --txt-soft:rgba(255,255,255,0.78);
+  --txt-mute:rgba(255,255,255,0.55);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{
+  font-family:'Inter',system-ui,Tahoma,sans-serif;
+  background:var(--navy-dark);
+  color:var(--w);
+  scroll-snap-type:y mandatory;
+  overflow-y:scroll;
+  scroll-behavior:smooth;
+}
+body{height:100vh;line-height:1.55}
+a{color:var(--bol);text-decoration:none;border-bottom:1px solid var(--bol)}
+a:hover{color:var(--w);border-color:var(--w)}
+
+/* HUD */
+.hud{position:fixed;top:20px;right:24px;z-index:90;display:flex;gap:18px;align-items:center;font-size:10.5pt;color:var(--txt-mute);background:rgba(15,36,64,0.7);padding:8px 16px;border-radius:24px;backdrop-filter:blur(8px);border:1px solid rgba(184,114,46,0.18)}
+.hud .counter{font-weight:700;color:var(--bol);font-size:11pt}
+.hud .hint{font-size:9pt;letter-spacing:0.06em;color:var(--txt-mute)}
+.hud .hint kbd{background:rgba(184,114,46,0.18);border:1px solid rgba(184,114,46,0.35);padding:1px 6px;border-radius:4px;font-family:inherit;font-size:8pt;color:var(--bol);margin:0 2px}
+.brand{position:fixed;top:20px;left:32px;z-index:90;font-size:11pt;font-weight:600;color:var(--w)}
+.brand span{color:var(--bol)}
+.progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--bo),var(--bol));z-index:100;width:0;transition:width 0.2s}
+
+/* Slide */
+.slide{
+  scroll-snap-align:start;
+  min-height:100vh;
+  padding:9vh 8vw 8vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  position:relative;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.slide.alt{background:var(--navy)}
+.slide.deep{background:linear-gradient(135deg,var(--navy-dark) 0%,#091a30 100%)}
+.slide-no{position:absolute;top:9vh;left:8vw;font-family:'Cormorant Garamond',serif;font-size:14pt;font-weight:600;color:rgba(184,114,46,0.45)}
+
+.kicker{font-size:10.5pt;font-weight:700;color:var(--bol);letter-spacing:0.28em;margin-bottom:18px}
+h1.title{font-family:'Cormorant Garamond',Georgia,serif;font-size:64pt;font-weight:700;line-height:1.02;letter-spacing:-0.025em;color:var(--w);margin-bottom:32px;max-width:1100px}
+h1.title .amber{color:var(--bol)}
+.lede{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:18pt;line-height:1.5;color:var(--txt-soft);max-width:900px;margin-bottom:36px}
+@media(max-width:900px){
+  h1.title{font-size:36pt}
+  .lede{font-size:14pt}
+}
+
+/* Layouts */
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:28px}
+.four-col{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:28px}
+@media(max-width:900px){
+  .three-col,.four-col,.two-col{grid-template-columns:1fr}
+}
+
+.card{background:var(--soft);border-left:3px solid var(--bo);padding:22px 26px;border-radius:0 8px 8px 0}
+.card h3{font-family:'Cormorant Garamond',serif;font-size:22pt;font-weight:600;color:var(--w);margin-bottom:10px;line-height:1.15}
+.card p{font-size:11pt;line-height:1.6;color:var(--txt-soft)}
+.card .tag{font-size:9.5pt;font-weight:700;color:var(--bol);letter-spacing:0.18em;margin-bottom:8px}
+
+.card.dark{background:rgba(15,36,64,0.4);border-left-color:var(--bol)}
+.card.from-col{background:rgba(232,237,242,0.06);border-left-color:rgba(255,255,255,0.3)}
+.card.from-col .tag{color:var(--txt-mute)}
+.card.to-col{background:linear-gradient(135deg,rgba(184,114,46,0.16),rgba(184,114,46,0.04));border-left-color:var(--bol)}
+.card.to-col .tag{color:var(--bol)}
+
+.bignum{font-family:'Cormorant Garamond',serif;font-size:88pt;font-weight:700;color:var(--bol);line-height:1;letter-spacing:-0.04em;margin-bottom:6px}
+.bignum-label{font-size:10.5pt;letter-spacing:0.18em;color:var(--txt-mute);font-weight:600;margin-bottom:24px}
+@media(max-width:900px){.bignum{font-size:56pt}}
+
+/* Quote block */
+.quote{font-family:'Cormorant Garamond',serif;font-size:24pt;font-weight:500;line-height:1.35;color:var(--w);max-width:880px;padding-left:26px;border-left:3px solid var(--bol);margin-top:20px}
+.quote .src{display:block;font-size:11pt;color:var(--txt-mute);margin-top:14px;font-family:'Inter',sans-serif;font-weight:500;letter-spacing:0.04em}
+@media(max-width:900px){.quote{font-size:18pt}}
+
+/* Stats row */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:28px;padding:22px 0 6px;border-top:1px solid var(--line);margin-top:28px}
+.stat .num{font-family:'Cormorant Garamond',serif;font-size:38pt;font-weight:700;color:var(--bol);line-height:1;letter-spacing:-0.02em}
+.stat .lbl{font-size:10.5pt;color:var(--txt-soft);margin-top:8px;line-height:1.45}
+.stat .src{font-size:9pt;color:var(--txt-mute);margin-top:6px}
+
+/* Sprint timeline */
+.sprint{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.sprint .wave{background:var(--soft);border-top:3px solid var(--bo);padding:24px 22px 22px;border-radius:0 0 8px 8px;position:relative}
+.sprint .wave .days{font-family:'Inter',sans-serif;font-weight:700;font-size:10pt;letter-spacing:0.22em;color:var(--bol);margin-bottom:10px}
+.sprint .wave .label{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22pt;color:var(--w);margin-bottom:12px;line-height:1.1}
+.sprint .wave .body{font-size:11pt;line-height:1.6;color:var(--txt-soft)}
+.sprint .wave .body strong{color:var(--bol);font-weight:600}
+.commit{margin-top:32px;padding:24px 28px;background:linear-gradient(135deg,rgba(184,114,46,0.18),rgba(184,114,46,0.04));border:1px solid var(--line);border-radius:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.commit .ci .n{font-family:'Cormorant Garamond',serif;font-size:32pt;font-weight:700;color:var(--bol);line-height:1}
+.commit .ci .l{font-size:10pt;color:var(--txt-soft);margin-top:6px;letter-spacing:0.04em}
+.commit-tag{grid-column:1/-1;font-size:10pt;letter-spacing:0.2em;color:var(--bol);font-weight:700;margin-bottom:-4px}
+@media(max-width:900px){.sprint,.commit{grid-template-columns:1fr}}
+
+/* Questions list */
+.q-list{display:grid;grid-template-columns:1fr;gap:18px;margin-top:18px;max-width:1000px}
+.q-item{background:var(--soft);border-left:3px solid var(--bol);padding:22px 28px;border-radius:0 8px 8px 0}
+.q-item .who{font-family:'Inter',sans-serif;font-weight:700;font-size:11pt;letter-spacing:0.18em;color:var(--bol);margin-bottom:8px}
+.q-item .ask{font-family:'Cormorant Garamond',serif;font-size:22pt;font-weight:500;line-height:1.3;color:var(--w)}
+.closing{margin-top:36px;font-family:'Cormorant Garamond',serif;font-size:28pt;font-weight:600;color:var(--bol);max-width:900px;line-height:1.2}
+@media(max-width:900px){.q-item .ask{font-size:17pt}.closing{font-size:22pt}}
+
+/* Notes overlay */
+.notes{
+  position:fixed;bottom:0;left:0;right:0;z-index:80;
+  background:var(--w);color:var(--navy-dark);
+  padding:24px 36px 28px;
+  max-height:44vh;overflow-y:auto;
+  transform:translateY(100%);
+  transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  border-top:4px solid var(--bo);
+  box-shadow:0 -8px 32px rgba(0,0,0,0.4);
+}
+.notes.shown{transform:translateY(0)}
+.notes h4{font-size:10pt;color:var(--bo);letter-spacing:0.22em;font-weight:700;margin-bottom:14px}
+.notes h4 .slidenum{color:rgba(15,36,64,0.5);margin-left:12px;font-weight:600}
+.notes ul{padding-left:22px;list-style:disc}
+.notes li{font-size:11.5pt;line-height:1.6;margin-bottom:8px;color:var(--navy-dark)}
+.notes li strong{color:var(--bo);font-weight:600}
+.notes-close{position:absolute;top:14px;right:24px;background:none;border:none;font-size:18pt;color:var(--bo);cursor:pointer;line-height:1}
+.notes-toggle-hint{position:fixed;bottom:18px;right:24px;z-index:70;background:rgba(15,36,64,0.85);color:var(--bol);padding:8px 14px;border-radius:24px;font-size:9pt;letter-spacing:0.1em;font-weight:600;border:1px solid var(--line);display:flex;align-items:center;gap:8px;backdrop-filter:blur(8px)}
+.notes-toggle-hint kbd{background:rgba(184,114,46,0.2);padding:1px 6px;border-radius:4px;font-family:inherit;font-size:8.5pt}
+
+/* Print */
+@media print{
+  html,body{height:auto;scroll-snap-type:none;background:var(--w);color:var(--navy-dark)}
+  .slide{min-height:auto;page-break-after:always;background:var(--w);color:var(--navy-dark);padding:24mm 18mm}
+  .slide.alt,.slide.deep{background:var(--w)}
+  h1.title,h1.title .amber,.card h3,.q-item .ask{color:var(--navy-dark)}
+  .kicker,.q-item .who,.sprint .wave .days{color:var(--bo)}
+  .card,.q-item,.sprint .wave,.commit{background:#f7f4ec}
+  .lede,.card p,.sprint .wave .body{color:var(--navy-dark)}
+  .hud,.brand,.progress,.notes,.notes-toggle-hint{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="brand">Craig Horton <span>Advisory</span></div>
+<div class="hud">
+  <span class="counter" id="counter">1 / 5</span>
+  <span class="hint"><kbd>&#8595;</kbd><kbd>&#8593;</kbd> advance &middot; <kbd>N</kbd> notes</span>
+</div>
+
+<!-- SLIDE 1: Phase 1, Poland Hub -->
+<section class="slide" data-slide="1" data-notes='{
+  "title":"Slide 1, the accountability slide",
+  "bullets":[
+    "Open by establishing the work shipped. The 18 to 4 month compression is the proof point you led the Hub through.",
+    "The Hans Koolen quote at Philips sets up the strategic frame, stop being a plumbing company.",
+    "Do not dwell here. This is context, the panel will judge Phase 2 not Phase 1. Move within 90 seconds.",
+    "Bridge line to slide 2, and four months is now the new ceiling."
+  ]
+}'>
+  <div class="slide-no">01 of 05</div>
+  <div class="kicker">Phase 1, 2021 to 2022</div>
+  <h1 class="title">The Poland Hub built the platform's <span class="amber">hands and eyes.</span></h1>
+
+  <div class="three-col">
+    <div class="card">
+      <div class="tag">the problem</div>
+      <h3>An 18-month onboarding ceiling.</h3>
+      <p>Hand-coded schema mapping for every new device class. Technical debt compounded faster than the device estate grew, internal teams stuck, third-party growth stalled.</p>
+    </div>
+    <div class="card">
+      <div class="tag">the fix</div>
+      <h3>Industrialise the hands and eyes.</h3>
+      <p>Established the Poland Center of Excellence. Standardised playbooks for device telemetry into HealthSuite Digital Platform. Mapped over 1,000 device types from disparate vendor protocols.</p>
+    </div>
+    <div class="card">
+      <div class="tag">the result</div>
+      <h3>Eighteen months to four.</h3>
+      <p>A 75 percent velocity gain. Foundation stabilised for third-party growth, the platform moved from a DIY failure to a secure base. Stewardship locked in.</p>
+    </div>
+  </div>
+
+  <div class="two-col" style="align-items:center;margin-top:24px">
+    <div>
+      <div class="bignum">75%</div>
+      <div class="bignum-label">velocity gain, Phase 1</div>
+    </div>
+    <div class="quote">
+      What would you stop doing today to unlock clinical innovation? Stop being a plumbing company.
+      <span class="src">The strategic question that framed the Hub mandate.</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 2: Inflection Point -->
+<section class="slide alt" data-slide="2" data-notes='{
+  "title":"Slide 2, the inflection",
+  "bullets":[
+    "This is the pivot. Phase 1 fixed the floor, the four-month onboarding cycle is now the ceiling against 2027 targets.",
+    "From hand-stitching to agentic orchestration. The shift is from hosting data to acting on data.",
+    "Lead with the MuleSoft 86 percent stat, lands on Dave as a CIO governance signal.",
+    "The Informatica handshake matters because they have already paid for it. Frame as continuity, not replacement.",
+    "Pivot the conversation from saving IT labour to driving platform consumption."
+  ]
+}'>
+  <div class="slide-no">02 of 05</div>
+  <div class="kicker">Phase 2, the inflection</div>
+  <h1 class="title">Connectivity is solved. <span class="amber">Autonomy</span> is the next bottleneck.</h1>
+  <p class="lede">Manual industrialisation has hit a ceiling. A four-month onboarding cycle is now the primary barrier to your 2027 growth targets, and the fix is not more hands, it is fewer hands on the loop.</p>
+
+  <div class="two-col">
+    <div class="card from-col">
+      <div class="tag">phase 1, what we built</div>
+      <h3>Hand-stitching data.</h3>
+      <p>Manual schema mapping, custom code per device class, four-month onboarding floor, the work of hosting data.</p>
+    </div>
+    <div class="card to-col">
+      <div class="tag">phase 2, what comes next</div>
+      <h3>Agentic orchestration.</h3>
+      <p>Reusable API blocks, sub-seven-day onboarding, Informatica cleaning the data DNA, MuleSoft as the real-time API context that powers Agentforce.</p>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat">
+      <div class="num">86%</div>
+      <div class="lbl">of IT leaders cite integration as the top blocker to AI deployment</div>
+      <div class="src">MuleSoft 2025 Connectivity Benchmark</div>
+    </div>
+    <div class="stat">
+      <div class="num">70%</div>
+      <div class="lbl">reduction in chat abandonment with Einstein and Agentforce live</div>
+      <div class="src">MuleSoft 2025</div>
+    </div>
+    <div class="stat">
+      <div class="num">57%</div>
+      <div class="lbl">productivity gain on modern composable integration platforms</div>
+      <div class="src">MuleSoft 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: Phase 2 Four Moves -->
+<section class="slide" data-slide="3" data-notes='{
+  "title":"Slide 3, the four moves",
+  "bullets":[
+    "This is the core slide. Spend three to four minutes here.",
+    "Tie each pillar to a panelist. Velocity to Tom (CTO), Autonomous to Laura (VPS), People to Dave (CIO), ROI to the room.",
+    "The Sonicare motor example is the visceral one, lean into it. A replacement motor shipped before the customer calls is the line they will remember.",
+    "Up-skill the Poland team from data janitors to AI orchestrators is the people commitment. Important for retention narrative.",
+    "Move to slide 4 by saying, here is how the first 90 days look."
+  ]
+}'>
+  <div class="slide-no">03 of 05</div>
+  <div class="kicker">Phase 2, the four moves</div>
+  <h1 class="title">Velocity, autonomy, people, <span class="amber">and ROI.</span></h1>
+  <p class="lede">Four parallel moves, all measurable in the same quarter. The platform stops being plumbing and becomes the neural system behind clinical operations.</p>
+
+  <div class="four-col">
+    <div class="card">
+      <div class="tag">01 velocity</div>
+      <h3>Composable APIs.</h3>
+      <p>MuleSoft replaces manual scripts with reusable API blocks. Onboarding compresses from four months to under seven days, an order-of-magnitude shift.</p>
+    </div>
+    <div class="card">
+      <div class="tag">02 autonomy</div>
+      <h3>Action in Slack.</h3>
+      <p>Agentforce reasons across clean data, resolves cases in Slack. Ships a replacement Sonicare motor before the customer calls, governance held in the audit log.</p>
+    </div>
+    <div class="card">
+      <div class="tag">03 people</div>
+      <h3>Janitors to orchestrators.</h3>
+      <p>The Poland team up-skills, builds guardrails and monitors API health, scales to ten times the device volume without ten times the headcount.</p>
+    </div>
+    <div class="card">
+      <div class="tag">04 ROI</div>
+      <h3>Five times faster.</h3>
+      <p>Projects ship five times faster. Thousands of hours reclaimed annually through automated self-serve workflows, reinvested in growth not maintenance.</p>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat">
+      <div class="num">50%</div>
+      <div class="lbl">cost reduction with a proven composable approach</div>
+      <div class="src">MuleSoft 2025</div>
+    </div>
+    <div class="stat">
+      <div class="num">3x</div>
+      <div class="lbl">faster development cycles with reusable API blocks</div>
+      <div class="src">MuleSoft 2025</div>
+    </div>
+    <div class="stat">
+      <div class="num">7 to 1</div>
+      <div class="lbl">days, integration template pattern compresses onboarding</div>
+      <div class="src">MuleSoft 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: 90 Day Sprint -->
+<section class="slide alt" data-slide="4" data-notes='{
+  "title":"Slide 4, the 90-day sprint",
+  "bullets":[
+    "The roadmap is concrete and timed. Three waves, each one ends on a named milestone.",
+    "Days 1-30, Connect. Ingest Sonicare telemetry through MuleSoft into a Unified Device Profile. The data DNA is clean and addressable.",
+    "Days 31-60, Ground. Configure Agentforce service rules. Example to use, if motor pressure drops trigger warranty shipment workflow.",
+    "Days 61-90, Action. Launch autonomous resolution in Slack. Proof: 30 percent reduction in manual tickets.",
+    "The $3M OpEx commit is conservative against the 50 percent cost reduction MuleSoft benchmark. Lands honest, not overclaimed.",
+    "Close with the explicit ask, lets kick off on Monday. Pause after."
+  ]
+}'>
+  <div class="slide-no">04 of 05</div>
+  <div class="kicker">The 90-day sprint</div>
+  <h1 class="title">First three million in OpEx savings, <span class="amber">ninety days from Monday.</span></h1>
+  <p class="lede">Three waves, each one ending on a named milestone the room can audit. No surveys, no maturity assessments, work that shows on Monday and outcomes that show by August.</p>
+
+  <div class="sprint">
+    <div class="wave">
+      <div class="days">days 01 to 30</div>
+      <div class="label">Connect.</div>
+      <div class="body">Ingest Sonicare telemetry through MuleSoft. Create a Unified Device Profile, a true Customer 360 across the device estate. The data DNA goes from <strong>siloed</strong> to <strong>addressable</strong>.</div>
+    </div>
+    <div class="wave">
+      <div class="days">days 31 to 60</div>
+      <div class="label">Ground.</div>
+      <div class="body">Configure Agentforce service rules against the clean profile. Example, if motor pressure drops below threshold, trigger the warranty-replacement workflow. Rules running, not yet autonomous, governance held.</div>
+    </div>
+    <div class="wave">
+      <div class="days">days 61 to 90</div>
+      <div class="label">Action.</div>
+      <div class="body">Launch autonomous resolution in Slack. Target: a <strong>30 percent reduction in manual tickets</strong>. The loop proves end to end, the team owns the audit trail, the model has scaled to a second line by day 90.</div>
+    </div>
+  </div>
+
+  <div class="commit">
+    <div class="commit-tag">the 90-day commitment</div>
+    <div class="ci"><div class="n">$3M</div><div class="l">OpEx savings, first cycle</div></div>
+    <div class="ci"><div class="n">25%</div><div class="l">faster ecosystem expansion</div></div>
+    <div class="ci"><div class="n">30%</div><div class="l">fewer manual tickets in the Slack triage queue</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 5: Direct Questions -->
+<section class="slide deep" data-slide="5" data-notes='{
+  "title":"Slide 5, the close",
+  "bullets":[
+    "This is the reciprocal slide. Three questions back at the panel, calibrated to their KPIs.",
+    "Dave (CIO) on 2027 compliance risk, the governance pivot from manual to autonomous.",
+    "Tom (CTO) on the first Lego-block target, makes him the architect of the pattern.",
+    "Laura (VPS) on capacity reinvestment, the people-growth question after the 30 percent reclaim.",
+    "Close on the position line, focus is your 2027 number. The platform is the lever.",
+    "Pause. Hand the floor back."
+  ]
+}'>
+  <div class="slide-no">05 of 05</div>
+  <div class="kicker">The close</div>
+  <h1 class="title">Three questions for the room, <span class="amber">one for each of you.</span></h1>
+
+  <div class="q-list">
+    <div class="q-item">
+      <div class="who">Dave, CIO</div>
+      <div class="ask">How does shifting from manual to autonomous governance improve your 2027 compliance risk profile?</div>
+    </div>
+    <div class="q-item">
+      <div class="who">Tom, CTO</div>
+      <div class="ask">Which legacy device line should we target for the first Lego-block API template, the one that proves the pattern?</div>
+    </div>
+    <div class="q-item">
+      <div class="who">Laura, VP Services</div>
+      <div class="ask">Once we reclaim 30 percent of your team's capacity in 90 days, where do we reinvest that talent for growth?</div>
+    </div>
+  </div>
+
+  <div class="closing">My focus is your 2027 number. The platform is the lever, the Hub is the proof, the sprint is the work.</div>
+</section>
+
+<!-- Notes overlay -->
+<div class="notes" id="notes">
+  <button class="notes-close" id="notes-close" aria-label="Close notes">&times;</button>
+  <h4 id="notes-title">Speaker notes <span class="slidenum"></span></h4>
+  <ul id="notes-list"></ul>
+</div>
+<div class="notes-toggle-hint" id="notes-hint"><kbd>N</kbd> speaker notes</div>
+
+<script>
+(function(){
+  const slides = document.querySelectorAll('.slide');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  const notes = document.getElementById('notes');
+  const notesList = document.getElementById('notes-list');
+  const notesTitle = document.getElementById('notes-title');
+  const slidenumSpan = notesTitle.querySelector('.slidenum');
+  const closeBtn = document.getElementById('notes-close');
+  let current = 1;
+
+  function updateHUD(idx){
+    current = idx;
+    counter.textContent = idx + ' / ' + slides.length;
+    progress.style.width = (idx / slides.length * 100) + '%';
+    if (notes.classList.contains('shown')) renderNotes(idx);
+  }
+
+  function renderNotes(idx){
+    const slide = slides[idx-1];
+    let raw = slide.getAttribute('data-notes');
+    if (!raw) { notesList.innerHTML='<li>No notes for this slide.</li>'; return; }
+    try {
+      const data = JSON.parse(raw);
+      notesTitle.firstChild.textContent = data.title || 'Speaker notes';
+      slidenumSpan.textContent = 'Slide ' + idx + ' of ' + slides.length;
+      notesList.innerHTML = data.bullets.map(b => '<li>' + b + '</li>').join('');
+    } catch(e) { notesList.innerHTML='<li>Notes failed to parse.</li>'; }
+  }
+
+  function toggleNotes(){
+    notes.classList.toggle('shown');
+    if (notes.classList.contains('shown')) renderNotes(current);
+  }
+
+  function scrollToSlide(idx){
+    if (idx < 1 || idx > slides.length) return;
+    slides[idx-1].scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  // Observe slides for HUD updates
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        const idx = Number(e.target.getAttribute('data-slide'));
+        updateHUD(idx);
+      }
+    });
+  }, {threshold: [0.5]});
+  slides.forEach(s => io.observe(s));
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      scrollToSlide(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      scrollToSlide(current - 1);
+    } else if (e.key === 'n' || e.key === 'N' || e.key === 's' || e.key === 'S') {
+      e.preventDefault();
+      toggleNotes();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      scrollToSlide(1);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      scrollToSlide(slides.length);
+    } else if (e.key === 'Escape') {
+      if (notes.classList.contains('shown')) notes.classList.remove('shown');
+    }
+  });
+
+  closeBtn.addEventListener('click', () => notes.classList.remove('shown'));
+
+  // Initial
+  updateHUD(1);
+})();
+</script>
+</body>
+</html>
