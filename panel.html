@@ -224,7 +224,7 @@ h1.title .amber{color:var(--bol)}
   <div class="slide-no">02 of 05</div>
   <div class="kicker">Phase 2, the inflection</div>
   <h1 class="title">Connectivity is solved. <span class="amber">Autonomy</span> is the next bottleneck.</h1>
-  <p class="lede">Manual industrialisation has hit a ceiling. A four-month onboarding cycle is now the primary barrier to your 2027 growth targets, and the fix is not more hands, it is fewer hands on the loop.</p>
+  <p class="lede">Manual industrialisation has hit a ceiling. A four-month onboarding cycle is now the primary barrier to your 2027 growth targets, the next move shifts the work onto the loop itself.</p>
 
   <div class="two-col">
     <div class="card from-col">
@@ -293,7 +293,7 @@ h1.title .amber{color:var(--bol)}
     <div class="card">
       <div class="tag">04 ROI</div>
       <h3>Five times faster.</h3>
-      <p>Projects ship five times faster. Thousands of hours reclaimed annually through automated self-serve workflows, reinvested in growth not maintenance.</p>
+      <p>Projects ship five times faster. Thousands of hours reclaimed annually through automated self-serve workflows, the reclaim feeds growth instead of maintenance overhead.</p>
     </div>
   </div>
 
@@ -445,12 +445,12 @@ h1.title .amber{color:var(--bol)}
   // Observe slides for HUD updates
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+      if (e.isIntersecting && e.intersectionRatio > 0.35) {
         const idx = Number(e.target.getAttribute('data-slide'));
         updateHUD(idx);
       }
     });
-  }, {threshold: [0.5]});
+  }, {threshold: [0.35, 0.6, 0.8]});
   slides.forEach(s => io.observe(s));
 
   // Keyboard
